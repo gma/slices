@@ -9,9 +9,8 @@ class SetLinkRenderer < WillPaginate::ActionView::LinkRenderer
     #
     def url(page)
       @base_url_params ||= begin
-        url_params = base_url_params
+        url_params = merge_get_params(default_url_params)
         merge_optional_params(url_params)
-        url_params
       end
 
       url_params = @base_url_params.dup
