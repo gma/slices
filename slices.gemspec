@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'redcarpet'         , '~> 3.0.0'
   s.add_dependency 'RedCloth'          , '~> 4.2.9'
   s.add_dependency 'stringex'          , '~> 1.4.0'
-  s.add_dependency 'will_paginate'     , '3.0.1'
+  s.add_dependency 'will_paginate'     , '3.0.2'
 
   src_files           = Dir['{app,lib}/**/*']
   template_files      = Dir['public/slices/templates/*.hbs']
