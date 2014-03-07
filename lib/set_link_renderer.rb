@@ -1,6 +1,6 @@
 require 'will_paginate/view_helpers/action_view'
 
-class SetLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
+class SetLinkRenderer < WillPaginate::ActionView::LinkRenderer
   protected
     # This method has been largely robbed from will_paginate's
     # lib/will_paginate/view_helpers/action_view.rb file, whose
