@@ -41,3 +41,12 @@
   </ul>
 </li>
 
+<li>
+  <label>History</label>
+  <ul class="page-history">
+    <li>Created by {{author.name}} <time datetime="{{created_at}}">{{moment created_at}}</time></li>
+    {{#each history}}
+      <li>{{event}} <time datetime="{{recorded_at}}">{{moment recorded_at}}</time></li>
+    {{/each}}
+  </ul>
+</li>

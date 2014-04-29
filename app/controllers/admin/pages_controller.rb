@@ -17,8 +17,10 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def create
-    @page = new_page_class.make(params[:page])
+    page_attrs = params[:page].merge(author: current_admin)
+    @page = new_page_class.make(page_attrs)
     @layouts = [['Default', 'default']]
+
     respond_with(:admin, @page) do |format|
       format.html { redirect_to admin_page_path(@page) }
     end
@@ -55,6 +57,8 @@ class Admin::PagesController < Admin::AdminController
     @page.update_attributes(params[:page])
 
     if @page.valid?
+      @page.add_to_history!("Edited by #{current_admin.name}")
+
       render json: as_json_for_page(@page)
     else
       render json: @page.errors.as_json, status: 422

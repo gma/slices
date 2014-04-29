@@ -17,6 +17,9 @@ class Page
   field :meta_description
   field :title
   field :has_content, type: Boolean, default: false
+  field :history, type: Array, default: []
+
+  belongs_to :author, class_name: 'Admin'
 
   index :_keywords, background: true
 
@@ -173,6 +176,20 @@ class Page
   def description=(value)
     ActiveSupport::Deprecation::warn DESCRIPTION_DEPRECATION_WARNING
     self.meta_description = value
+  end
+
+  def add_to_history(event)
+    self.history ||= []
+
+    self.history << {
+      event: event,
+      recorded_at: Time.now
+    }
+  end
+
+  def add_to_history!(event)
+    add_to_history(event)
+    save!
   end
 
   private
