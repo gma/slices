@@ -51,10 +51,6 @@ require 'set_link_renderer'
 
 Slices::Config.use_snippets!
 
-if Rails.env.test? || Rails.env.development?
-  require 'standard_tree'
-end
-
 Mime::Type.register_alias 'text/plain', :hbs
 Time::DATE_FORMATS.merge!(
   day_month_year: '%d %B %Y'

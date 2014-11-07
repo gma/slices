@@ -7,6 +7,7 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'rack_utf8_fix'
+require 'standard_tree'
 
 Paperclip.options[:logger] = Rails.logger
 Paperclip.options[:log] = true
