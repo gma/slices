@@ -59,7 +59,11 @@ class Admin::EntriesController < Admin::AdminController
   end
 
   def raw_entries
-    entry_class.entries
+    if set_slice.restrict_entries_to_page?
+      @page.entries(entry_type)
+    else
+      entry_class.entries
+    end
   end
 
   def sort_direction

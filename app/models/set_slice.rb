@@ -44,6 +44,10 @@ class SetSlice < Slice
     read_attribute(:sort_direction) || DEFAULT_SORT_DIRECTION
   end
 
+  def restrict_entries_to_page?
+    false
+  end
+
 
   private
 
