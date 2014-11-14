@@ -9,8 +9,12 @@ module Slices
         permalink: permalink,
         slices:    ordered_slices_for(options[:slice_embed]).map {|slice| slice.as_json },
         available_layouts: available_layouts,
-        author: author
+        author:    author
       )
+
+      fields.select { |name, field| field.localized? }.keys.each do |key|
+        hash.merge!(key.to_sym => send(key))
+      end
 
       keys = options[:only]
       keys ? hash.slice(keys) : hash

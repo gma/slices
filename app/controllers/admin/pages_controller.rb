@@ -54,7 +54,9 @@ class Admin::PagesController < Admin::AdminController
       params[:page][:set_slices] = params[:page].delete(:slices)
     end
 
+    slices = params[:page].delete(:slices)
     @page.update_attributes(params[:page])
+    
 
     if @page.valid?
       render json: as_json_for_page(@page)
@@ -73,6 +75,7 @@ class Admin::PagesController < Admin::AdminController
   end
 
   private
+
     def new_page_class
       params[:type].nil? ? Page : Object.const_get(params[:type].camelize)
     end

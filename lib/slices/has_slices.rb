@@ -34,12 +34,23 @@ module Slices
           slice = slice.symbolize_keys
           next if slice[:_destroy]
           slice.delete :_new
+
           (slice[:type] + '_slice').
             camelize.
             constantize.
             new(slice).tap do |s|
-              s.id = slice[:id] if slice[:id].present?
+              if slice[:id].present?
+                oslice = slices.find(slice[:id])
+
+                oslice.fields.select { |_, field| field.localized? }.keys.each do |key|
+                  s.send("#{key}_translations=", oslice.attributes[key])
+                end
+
+                s.write_attributes(slice)
+                s.id = slice[:id]
+              end
             end
+
         }.compact
       end
 

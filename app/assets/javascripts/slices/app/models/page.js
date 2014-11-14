@@ -10,7 +10,10 @@ slices.model.Page = (
 
     function load(callback) {
       $.ajax({
-        url: settings.loadPagePath.split('{{id}}').join(pageId),
+        url: function() {
+          console.log('settings', settings.loadPagePath, settings.loadPagePath.split('{{id}}').join(pageId));
+          return settings.loadPagePath.split('{{id}}').join(pageId);
+        }(),
         contentType: 'application/json',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {

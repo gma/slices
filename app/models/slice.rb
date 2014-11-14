@@ -67,6 +67,10 @@ class Slice
     attributes.symbolize_keys.except(:_id, :_type).tap do |result|
       result.merge!(id: id, type: type)
       result.merge!(client_id: client_id) if client_id? && new_record?
+
+      fields.select { |name, field| field.localized? }.keys.each do |key|
+        result.merge!(key.to_sym => send(key))
+      end
     end
   end
 
